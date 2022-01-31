@@ -8,6 +8,15 @@ jobs:
   - job: Terraform_Plan
     steps:
       - script: "make plan"
+      - script: ls -lrtha
+      - script: touch test.txt
+      - script: ls -lrtha
+      - saveCache: TestCache
+        path: ./test.txt
   - job: Terraform_Apply
     steps:
       - script: "make apply"
+      - script: ls -lsrtah
+      - restoreCache: TestCache
+      - script: ls -lsrtah
+
