@@ -1,0 +1,13 @@
+---
+trigger:
+  - main
+jobs:
+- job: Terraform Init
+  steps:
+  - script: "make init"
+- job: Terraform Plan
+  steps:
+  - script: "make plan"
+- job: Terraform apply
+  steps:
+  - script: "make apply"
