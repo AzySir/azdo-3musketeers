@@ -2,12 +2,12 @@
 trigger:
   - main
 jobs:
-- job: Terraform Init
+- job: Terraform_Init
   steps:
   - script: "make init"
-- job: Terraform Plan
+- job: Terraform_Plan
   steps:
   - script: "make plan"
-- job: Terraform apply
+- job: Terraform_Apply
   steps:
   - script: "make apply"
