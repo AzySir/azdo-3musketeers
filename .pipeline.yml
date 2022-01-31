@@ -1,22 +1,23 @@
 ---
 trigger:
   - main
-jobs:
-  - job: Terraform_Init
-    steps:
-      - script: "make init"
-  - job: Terraform_Plan
-    steps:
-      - script: "make plan"
-      - script: ls -lrtha
-      - script: touch test.txt
-      - script: ls -lrtha
-      - saveCache: TestCache
-        path: ./test.txt
-  - job: Terraform_Apply
-    steps:
-      - script: "make apply"
-      - script: ls -lsrtah
-      - restoreCache: TestCache
-      - script: ls -lsrtah
-
+stages:
+  - stage: TerraformInit
+    jobs:
+      - job: TerraformInitJob
+        steps:
+          - script: "make init"
+  - stage: TerraformPlan
+    jobs:
+      - job: TerraformPlanJob
+        steps:
+          - script: "make plan"
+          - script: ls -lrtha
+          - script: touch test.txt
+          - script: ls -lrtha
+  - stage: TerraformApply
+    jobs:
+      - job: Terraform_Apply
+        steps:
+          - script: "make apply"
+          - script: ls -lsrtah
